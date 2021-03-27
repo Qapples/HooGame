@@ -24,7 +24,7 @@ public class HandBehaviorScript : MonoBehaviour
     
     private SerialPort _serialPort;
     private bool _isSlamReady;
-    private float _originalYPos;
+    private Vector3 _originalPos;
     private Rigidbody _rigidBody;
 
     // Start is called before the first frame update
@@ -32,7 +32,7 @@ public class HandBehaviorScript : MonoBehaviour
     {
         //Make sure that the time scale is 1. It could be zero if it the previous game was a game over.
         Time.timeScale = 1;
-        _originalYPos = transform.position.y;
+        _originalPos = transform.position;
         _rigidBody = GetComponent<Rigidbody>();
         _isSlamReady = true;
         
@@ -49,7 +49,7 @@ public class HandBehaviorScript : MonoBehaviour
     void Update()
     {
         //If the hand reaches it's "recovery position" after slamming, get ready for another slam
-        if (!_isSlamReady && transform.position.y >= _originalYPos)
+        if (!_isSlamReady && transform.position.y >= _originalPos.y)
         {
             _isSlamReady = true;
             _rigidBody.velocity = Vector3.zero;
@@ -61,15 +61,20 @@ public class HandBehaviorScript : MonoBehaviour
             _rigidBody.velocity = new Vector3(0, slamSpeed, 0);
             _isSlamReady = false;
         }
+        
     }
     
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         //if we collided with the bug_, level up. If collided with the floor, begin recovery. If collided
         //with anything else, we lose
         if (other.gameObject.name == "Bug")
         {
             GlobalVar.CurrentLevel++;
+            
+            _rigidBody.velocity = Vector3.zero;
+            _rigidBody.position = _originalPos;
+            _isSlamReady = true;
         }
         else if (other.gameObject.name == "Floor")
         {
@@ -90,5 +95,5 @@ public class HandBehaviorScript : MonoBehaviour
     /// Determines if the hand should be slammed down. 
     /// </summary>
     /// <returns></returns>
-    private bool SlamHand => debug ? Input.GetButtonDown("Jump") : _serialPort.ReadLine()[0] == '1';
+    private bool SlamHand => debug ? Input.GetKey(KeyCode.Space) : _serialPort.ReadLine()[0] == '1';
 }

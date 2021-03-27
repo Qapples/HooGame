@@ -49,12 +49,12 @@ public class BugBehavior : MonoBehaviour
         {
             _prevLevel = GlobalVar.CurrentLevel;
 
-            movementSpeed = _prevLevel * levelFactorSpeed;
+            movementSpeed += _prevLevel * levelFactorSpeed;
             transform.position = _startPos;
             _rigidBody.velocity = new Vector3(movementSpeed, 0, 0);
         }
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         //when a bound is hit, reverse the velocity.
