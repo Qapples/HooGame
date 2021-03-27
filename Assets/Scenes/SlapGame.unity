@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 516701749}
   - component: {fileID: 516701748}
   - component: {fileID: 516701747}
+  - component: {fileID: 516701751}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -409,6 +410,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &516701751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516701746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f18ffb7f4a58de4b8cefcd097c0ed66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comPort: 7
+  baudRate: 9600
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,12 +894,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896936381}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fb0e27774180c844a12e66cdbd95441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
+  levelFactorSpeed: 0
+  levelFactorSize: 0
 --- !u!54 &1896936387
 Rigidbody:
   m_ObjectHideFlags: 0
