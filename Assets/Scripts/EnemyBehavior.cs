@@ -39,6 +39,7 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //reset the position of the enemy and increase the speed
         if (_prevLevel != GlobalVar.CurrentLevel)
         {
@@ -60,6 +61,8 @@ public class EnemyBehavior : MonoBehaviour
         if (other.gameObject.name == "Bound")
         {
             _rigidbody.velocity *= -1;
+            
+            transform.Rotate(0, 180, 0);
         }
     }
 }

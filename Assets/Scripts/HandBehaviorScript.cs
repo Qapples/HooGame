@@ -84,6 +84,7 @@ public class HandBehaviorScript : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Hit: " + other.gameObject.name);
         //if we collided with the bug_, level up. If collided with the floor, begin recovery. If collided
         //with anything else, we lose
         switch (other.gameObject.name)

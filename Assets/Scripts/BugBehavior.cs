@@ -61,6 +61,8 @@ public class BugBehavior : MonoBehaviour
         if (other.gameObject.name == "Bound")
         {
             _rigidBody.velocity *= -1;
+            
+            transform.Rotate(0, 180, 0);
         }
     }
 }
