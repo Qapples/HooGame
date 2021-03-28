@@ -346,7 +346,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &516701748
 MeshRenderer:
@@ -396,7 +396,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516701746}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 2033349665412490600, guid: 1a6d2c60d7c9c7f4ba5d5b9ac6124f71, type: 3}
 --- !u!4 &516701750
 Transform:
   m_ObjectHideFlags: 0
@@ -404,13 +404,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516701746}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.45451945, y: -0.45451945, z: -0.54167527, w: 0.54167527}
   m_LocalPosition: {x: -1.05, y: 2.55, z: -0.992}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.005197336, y: 0.005197336, z: 0.005197336}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: -80, y: 0, z: -90}
 --- !u!114 &516701751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f18ffb7f4a58de4b8cefcd097c0ed66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 0
+  debug: 1
   comPort: 3
   baudRate: 9600
   recoverySpeed: 5
@@ -809,7 +809,7 @@ Transform:
   m_LocalScale: {x: 0.0037, y: 3.8164768, z: 2.2192955}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896936381
 GameObject:
@@ -950,6 +950,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3355431506696594112, guid: 26c47e04c826b9248a162a53ddab1bde, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 2532379284240547586, guid: 26c47e04c826b9248a162a53ddab1bde, type: 3}
     - target: {fileID: 3355431506696594112, guid: 26c47e04c826b9248a162a53ddab1bde, type: 3}
       propertyPath: frequency
       value: 2
