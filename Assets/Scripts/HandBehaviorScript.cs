@@ -1,5 +1,6 @@
 using System;
 using System.IO.Ports;
+using System.Threading;
 using UnityEditor;
 using UnityEngine;
 
@@ -30,6 +31,7 @@ public class HandBehaviorScript : MonoBehaviour
     private Rigidbody _rigidBody;
     
     private Vector3 _originalPos;
+    private Thread _serialThread;
     private Vector3 _velocity => _rigidBody.velocity;
 
     // Start is called before the first frame update
@@ -47,6 +49,11 @@ public class HandBehaviorScript : MonoBehaviour
         if (debug) return;
         _serialPort = new SerialPort {PortName = $"COM{comPort}", BaudRate = baudRate};
         _serialPort.Open();
+        
+        //Start the thread
+        _serialThread = new Thread(() => SerialThread(_serialPort));
+        _serialThread.Start();
+
     }
 
     // Update is called once per frame
@@ -65,7 +72,6 @@ public class HandBehaviorScript : MonoBehaviour
             _rigidBody.velocity = new Vector3(_velocity.x, slamSpeed, 0);
             _isSlamReady = false;
         }
-        
     }
     
     private void OnTriggerEnter(Collider other)
@@ -99,9 +105,18 @@ public class HandBehaviorScript : MonoBehaviour
         }
     }
 
+    private bool _isReceivedOne;
+    private void SerialThread(SerialPort serialPort)
+    {
+        while (true)
+        {
+            _isReceivedOne = serialPort.ReadLine()[0] == '1';
+        }
+    }
+
     /// <summary>
     /// Determines if the hand should be slammed down. 
     /// </summary>
     /// <returns></returns>
-    private bool SlamHand => debug ? Input.GetKey(KeyCode.Space) : _serialPort.ReadLine()[0] == '1';
+    private bool SlamHand => debug ? Input.GetKey(KeyCode.Space) : _isReceivedOne;
 }
