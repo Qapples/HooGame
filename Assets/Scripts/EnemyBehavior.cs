@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 public class EnemyBehavior : MonoBehaviour
 {
@@ -23,8 +23,7 @@ public class EnemyBehavior : MonoBehaviour
     private Rigidbody _rigidbody;
     private Vector3 _originalPos;
     private int _prevLevel;
-    private Random _rng;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +32,6 @@ public class EnemyBehavior : MonoBehaviour
         _rigidbody.velocity = new Vector3(moveSpeed, 0, 0);
         _prevLevel = GlobalVar.CurrentLevel;
         _originalPos = transform.position;
-        _rng = new Random();
     }
 
     // Update is called once per frame
@@ -51,7 +49,7 @@ public class EnemyBehavior : MonoBehaviour
             //Add a new enemy every "frequency" levels
             if (GlobalVar.CurrentLevel % frequency == 0)
             {
-                float randomX = (float) _rng.NextDouble() * (4 - -5) + -5;
+                float randomX = Random.Range(-5, 4);
                 GameObject obj = Instantiate(prefab, new Vector3(randomX, _originalPos.y, _originalPos.z),
                     new Quaternion(0, 0.7f, 0, 0.7f));
                 obj.GetComponent<Rigidbody>().velocity = _rigidbody.velocity;

@@ -32,6 +32,8 @@ public class HandBehaviorScript : MonoBehaviour
 
     [Tooltip("Clip that plays when you squish the cat.")]
     public AudioClip catClip;
+
+    public AudioClip coinClip;
     
     private SerialPort _serialPort;
     private bool _isSlamReady;
@@ -115,6 +117,10 @@ public class HandBehaviorScript : MonoBehaviour
                 break;
             case "Bound":
                 _rigidBody.velocity = new Vector3(-_velocity.x, _velocity.y, 0);
+                break;
+            case "Coin":
+                GlobalVar.Coins++;
+                _audioSource.PlayOneShot(coinClip);
                 break;
             default:
                 //TODO: Add more game lose logic
