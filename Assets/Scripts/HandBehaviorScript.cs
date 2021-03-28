@@ -45,19 +45,23 @@ public class HandBehaviorScript : MonoBehaviour
         _rigidBody.velocity = new Vector3(moveSpeed, 0, 0);
         _isSlamReady = true;
         slamSpeed = -Math.Abs(slamSpeed); //ensure that the slam value is negative
-
+        
         //Serial setup. Don't do if in debug mode
         if (debug) return;
-        _serialPort = new SerialPort
-        {
-            PortName = $"COM{comPort}", BaudRate = baudRate, Handshake = Handshake.None, Parity = Parity.None,
-            DataBits = 8, StopBits = StopBits.One
-        };
+        _serialPort = new SerialPort {PortName = $"COM{comPort}", BaudRate = baudRate};
         _serialPort.Open();
 
         //Start the thread
-        _serialThread = new Thread(new ThreadStart(SerialThread));
+        _serialThread = new Thread(SerialThread);
         _serialThread.Start();
+        
+        //events
+        Application.quitting += () =>
+        {
+            Debug.Log("Quitting...");
+            _serialThread.Abort();
+            _serialPort.Dispose();
+        };
     }
 
     // Update is called once per frame
@@ -112,10 +116,11 @@ public class HandBehaviorScript : MonoBehaviour
     private bool _isReceivedOne;
     private void SerialThread()
     {
+        _serialPort.DiscardInBuffer();
         while (true)
         {
-            Debug.Log(_serialPort.ReadLine());
-            _isReceivedOne = _serialPort.ReadLine()[0] == '1';
+            _isReceivedOne = _serialPort.ReadByte() == 1;
+            Thread.Sleep(20);
         }
     }
 
