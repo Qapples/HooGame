@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
+using Random = System.Random;
 
 public class EnemyBehavior : MonoBehaviour
 {
@@ -16,9 +17,13 @@ public class EnemyBehavior : MonoBehaviour
     [Tooltip("How often a new enemy should be added after each level")]
     public int frequency;
 
+    [Header("Prefab")] [Tooltip("This is the prefab that is spawned whenever there is a difficulty increase")]
+    public GameObject prefab;
+
     private Rigidbody _rigidbody;
     private Vector3 _originalPos;
     private int _prevLevel;
+    private Random _rng;
     
     // Start is called before the first frame update
     void Start()
@@ -28,6 +33,7 @@ public class EnemyBehavior : MonoBehaviour
         _rigidbody.velocity = new Vector3(moveSpeed, 0, 0);
         _prevLevel = GlobalVar.CurrentLevel;
         _originalPos = transform.position;
+        _rng = new Random();
     }
 
     // Update is called once per frame
@@ -43,7 +49,8 @@ public class EnemyBehavior : MonoBehaviour
             //Add a new enemy every "frequency" levels
             if (GlobalVar.CurrentLevel % frequency == 0)
             {
-                
+                float randomX = (float)_rng.NextDouble() * (4 - -5) + -5;
+                Instantiate(prefab, new Vector3(randomX, 0, 0), Quaternion.identity);
             }
         }
     }
