@@ -491,7 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  comPort: 3
+  comPort: 6
   baudRate: 9600
   recoverySpeed: 5
   slamSpeed: 10
