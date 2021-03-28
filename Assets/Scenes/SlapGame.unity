@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f18ffb7f4a58de4b8cefcd097c0ed66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   comPort: 3
   baudRate: 9600
   recoverySpeed: 5
