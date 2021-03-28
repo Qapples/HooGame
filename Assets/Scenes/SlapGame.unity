@@ -498,7 +498,7 @@ MonoBehaviour:
   moveSpeed: 3
   squishClip: {fileID: 8300000, guid: 08dfc80ba847f4c40be2d6f315382600, type: 3}
   catClip: {fileID: 8300000, guid: 4bdbd8d14f9a1d344ba9b8d417d4103d, type: 3}
-  coinClip: {fileID: 0}
+  coinClip: {fileID: 8300000, guid: 2c3744f96caa32b488a67d236fcc7ada, type: 3}
 --- !u!54 &516701752
 Rigidbody:
   m_ObjectHideFlags: 0
