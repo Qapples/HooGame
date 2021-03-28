@@ -11,5 +11,10 @@ public static class GlobalVar
     /// The current level the game is on. 0 or less when the game is not active. When the player moves up a level,
     /// everything should reset and increase in difficulty
     /// </summary>
-    public static int CurrentLevel { get; set; }
+    public static int CurrentLevel { get; set; } = 1;
+    
+    /// <summary>
+    /// Coins collected during game play.
+    /// </summary>
+    public static int Coins { get; set; }
 }

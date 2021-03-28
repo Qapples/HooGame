@@ -25,15 +25,23 @@ public class HandBehaviorScript : MonoBehaviour
 
     [Tooltip("How fast the hand moves side to side")]
     public float moveSpeed;
+
+    [Header("Audio files")]
+    [Tooltip("Clip that plays when you squish the bug.")]
+    public AudioClip squishClip;
+
+    [Tooltip("Clip that plays when you squish the cat.")]
+    public AudioClip catClip;
     
     private SerialPort _serialPort;
     private bool _isSlamReady;
     private Rigidbody _rigidBody;
+    private AudioSource _audioSource;
     
     private Vector3 _originalPos;
     private Thread _serialThread;
     private Vector3 _velocity => _rigidBody.velocity;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +52,7 @@ public class HandBehaviorScript : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody>();
         _rigidBody.velocity = new Vector3(moveSpeed, 0, 0);
         _isSlamReady = true;
+        _audioSource = GetComponent<AudioSource>();
         slamSpeed = -Math.Abs(slamSpeed); //ensure that the slam value is negative
         
         //Serial setup. Don't do if in debug mode
@@ -90,9 +99,12 @@ public class HandBehaviorScript : MonoBehaviour
         switch (other.gameObject.name)
         {
             case "Bug":
+                //play audio
+                _audioSource.PlayOneShot(squishClip);
+                
                 //reset the scene
                 GlobalVar.CurrentLevel++;
-                
+
                 _rigidBody.velocity = new Vector3(_velocity.x , 0, 0);
                 _rigidBody.position = _originalPos;
                 _isSlamReady = true;
@@ -107,6 +119,8 @@ public class HandBehaviorScript : MonoBehaviour
             default:
                 //TODO: Add more game lose logic
                 Debug.Log("Game Over");
+                GlobalVar.CurrentLevel = 0;
+                _audioSource.PlayOneShot(catClip);
 
                 //set the time scale as zero for now. 
                 Time.timeScale = 0;

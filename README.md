@@ -7,3 +7,5 @@ Plank textures: https://assetstore.unity.com/packages/2d/textures-materials/wood
 Hand model: https://www.turbosquid.com/3d-models/hand-hdri-shader-3d-model-1311775 
 Ant Model: https://www.turbosquid.com/3d-models/ant-animation-running-3ds-free/856094
 Cat: model: https://www.turbosquid.com/3d-models/cat-kitten-animal-3d-model-1678471
+Squish sound effect: http://freesoundeffect.net/tags/squish
+Cat sound effect: https://www.dreamstime.com/stock-sound-effect-cat-s-meow-can-be-used-various-projects-audio100006562

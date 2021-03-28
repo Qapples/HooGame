@@ -39,10 +39,11 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //reset the position of the enemy and increase the speed
         if (_prevLevel != GlobalVar.CurrentLevel)
         {
+            _prevLevel = GlobalVar.CurrentLevel;
+            
             moveSpeed += GlobalVar.CurrentLevel * levelFactorSpeed;
             _rigidbody.position = _originalPos;
             _rigidbody.velocity = new Vector3(moveSpeed, 0, 0);
@@ -50,8 +51,10 @@ public class EnemyBehavior : MonoBehaviour
             //Add a new enemy every "frequency" levels
             if (GlobalVar.CurrentLevel % frequency == 0)
             {
-                float randomX = (float)_rng.NextDouble() * (4 - -5) + -5;
-                Instantiate(prefab, new Vector3(randomX, 0, 0), Quaternion.identity);
+                float randomX = (float) _rng.NextDouble() * (4 - -5) + -5;
+                GameObject obj = Instantiate(prefab, new Vector3(randomX, _originalPos.y, _originalPos.z),
+                    new Quaternion(0, 0.7f, 0, 0.7f));
+                obj.GetComponent<Rigidbody>().velocity = _rigidbody.velocity;
             }
         }
     }
